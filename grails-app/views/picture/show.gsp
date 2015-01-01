@@ -1,10 +1,10 @@
 
-<%@ page import="com.photo.Album" %>
+<%@ page import="com.photo.Picture" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'album.label', default: 'Album')}" />
+        <g:set var="entityName" value="${message(code: 'picture.label', default: 'Picture')}" />
         <title><g:message code="default.show.label" args="[entityName]" /></title>
     </head>
     <body>
@@ -23,57 +23,46 @@
                     <tbody>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="album.id.label" default="Id" /></td>
+                            <td valign="top" class="name"><g:message code="picture.id.label" default="Id" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: albumInstance, field: "id")}</td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="album.caption.label" default="Caption" /></td>
-                            
-                            <td valign="top" class="value">${fieldValue(bean: albumInstance, field: "caption")}</td>
+                            <td valign="top" class="value">${fieldValue(bean: pictureInstance, field: "id")}</td>
                             
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="album.description.label" default="Description" /></td>
+                            <td valign="top" class="name"><g:message code="picture.caption.label" default="Caption" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: albumInstance, field: "description")}</td>
+                            <td valign="top" class="value">${fieldValue(bean: pictureInstance, field: "caption")}</td>
                             
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="album.pictures.label" default="Pictures" /></td>
+                            <td valign="top" class="name"><g:message code="picture.description.label" default="Description" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: pictureInstance, field: "description")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="picture.album.label" default="Album" /></td>
+                            
+                            <td valign="top" class="value"><g:link controller="album" action="show" id="${pictureInstance?.album?.id}">${pictureInstance?.album?.encodeAsHTML()}</g:link></td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="picture.images.label" default="Photo" /></td>
                             
                             <td valign="top" style="text-align: left;" class="value">
-                                <ul>
-                                <g:each in="${albumInstance.pictures}" var="p">
-                                    <li><g:link controller="picture" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
-                                </g:each>
-                                </ul>
+                            	<img src="${createLink(action:'displayMediumPhoto', id:pictureInstance.id)}"/>
                             </td>
                             
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="album.lastUpdated.label" default="Last Updated" /></td>
+                            <td valign="top" class="name"><g:message code="picture.user.label" default="User" /></td>
                             
-                            <td valign="top" class="value"><g:formatDate date="${albumInstance?.lastUpdated}" /></td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="album.dateCreated.label" default="Date Created" /></td>
-                            
-                            <td valign="top" class="value"><g:formatDate date="${albumInstance?.dateCreated}" /></td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="album.user.label" default="User" /></td>
-                            
-                            <td valign="top" class="value"><g:link controller="user" action="show" id="${albumInstance?.user?.id}">${albumInstance?.user?.encodeAsHTML()}</g:link></td>
+                            <td valign="top" class="value"><g:link controller="user" action="show" id="${pictureInstance?.user?.id}">${pictureInstance?.user?.encodeAsHTML()}</g:link></td>
                             
                         </tr>
                     
@@ -82,7 +71,7 @@
             </div>
             <div class="buttons">
                 <g:form>
-                    <g:hiddenField name="id" value="${albumInstance?.id}" />
+                    <g:hiddenField name="id" value="${pictureInstance?.id}" />
                     <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
                     <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
                 </g:form>

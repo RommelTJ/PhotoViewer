@@ -12,13 +12,13 @@ class Album {
 
     static hasMany = [pictures:Picture]
 
-    static mapping = {
-        user unique: false
-    }
-
     static constraints = {
         caption(nullable:true, maxSize:40)
         description(nullable:true, maxSize:1024)
+    }
+
+    static mapping = {
+        user unique: false
     }
 
     String toString() {

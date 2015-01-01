@@ -1,16 +1,14 @@
 package com.photo
 
-class Image implements Comparable{
+class Image implements Comparable {
+    Picture picture
     Integer size
     String mimeType
     byte[] data
     Integer width
     Integer height
-    Picture picture
 
-    static transients = ['rawImage']
-
-    static belongsTo = [Picture]
+    static belongsTo = [ Picture ]
 
     static constraints = {
         data(maxSize:1024*1024)
@@ -27,4 +25,5 @@ class Image implements Comparable{
     int compareTo(other) {
         size.compareTo(other.size)
     }
+
 }
