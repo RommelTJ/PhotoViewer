@@ -12,8 +12,6 @@ class Picture {
 
     static hasMany = [images:Image]
 
-    static transients = ['rawImage']
-
     static constraints = {
         caption(nullable:true, maxSize:40)
         description(nullable:true, maxSize:1024)
@@ -23,5 +21,4 @@ class Picture {
         user unique: false
         album unique: false
     }
-
 }
